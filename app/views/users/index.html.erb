@@ -1,0 +1,75 @@
+<ul class="nav nav-pills nav-stacked">
+  <li class="active"><a href="/">111</a></li>
+  <li><a href="/users">Users</a></li>
+  <li><a href="#">Test</a></li>
+</ul>
+
+<%= link_to 'New User', '/users/new' %>
+</br>
+</br>
+<div>
+  会员总人数：<%= @users.count %>
+</div>
+</br>
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:center;width: 70px">Id</th>
+      <th style="text-align:center;width: 70px">Name</th>
+      <th style="text-align:center;width: 70px">Phone</th>
+      <th style="text-align:center;width: 70px"></th>
+      <th style="text-align:center;width: 70px"></th>
+      <th style="text-align:center;width: 70px"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td style="text-align:center;width: 70px"><%= user.id %></td>
+        <td style="text-align:center;width: 70px"><%= user.name %></td>
+        <td style="text-align:center;width: 70px"><%= user.phone %></td>
+        <td style="text-align:center;width: 70px"><%= link_to 'Show', '/users/'+user.id.to_s %></td>
+        <td style="text-align:center;width: 70px"><%= link_to 'Edit', '/users/'+user.id.to_s+'/edit' %></td>
+        <td style="text-align:center;width: 70px"><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New User', new_user_path %>
+</br>
+
+<a id="element" href="#" data-toggle="tooltip"  title="1<br>2<br3>" data-placement="bottom" data-html="&nbsp;">Hover over me</a>
+</br>
+</br>
+</br>
+</br>
+
+<div class="bs-example-tooltips">
+  <button id="element" type="button" class="btn btn-default" data-toggle="tooltip" data-placement="left" title="4" data-html="&nbsp;">左侧Tooltip</button>
+  <button id="element" type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="1" data-html="&nbsp;">上方Tooltip</button>
+  <button id="element" type="button" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="3" data-html="&nbsp;">下方Tooltip</button>
+  <button id="element" type="button" class="btn btn-default" data-toggle="tooltip" data-placement="right" title="2" data-html="&nbsp;">右侧Tooltip</button>
+</div>-
+
+</br>
+</br>
+</br>
+</br>
+
+<div class="well">
+  <a href="#" id="example" class="btn btn-danger" rel="popover" data-content="It's so simple to create a tooltop for my website!" data-original-title="<div style='color:blue;'>Twitter</div><br> Bootstrap<br> Popover" data-html="1">hover for popover</a>
+</div>
+
+<script type="text/javascript">
+    $('#element').tooltip('hide');
+</script>
+
+<script type="text/javascript">
+    $(function ()
+    { $("#example").tooltip('show');
+    });
+</script>
