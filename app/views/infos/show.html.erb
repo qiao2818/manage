@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @info.user_id %>
+</p>
+
+<p>
+  <strong>Money:</strong>
+  <%= @info.money %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @info.date %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @info.address %>
+</p>
+
+<%= link_to 'Edit', edit_info_path(@info) %> |
+<%= link_to 'Back', infos_path %>

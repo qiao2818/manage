@@ -1,0 +1,18 @@
+<h1>充值</h1>
+<br>
+编号：<%= @user.id %>
+<br>
+姓名：<%= @user.name %>
+<br>
+电话：<%= @user.phone %>
+
+<br>
+<br>
+
+<div>
+  <%= form_tag "/recharge", :method => :get do %>
+      <%= hidden_field_tag 'user_id', @user.id %>
+      <p><%= text_field_tag 'money' %></p>
+      <%= button_tag "充值", data: { confirm: '确认充值？' } %>
+  <% end %>
+</div>

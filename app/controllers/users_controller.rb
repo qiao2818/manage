@@ -1,10 +1,14 @@
+# encoding: utf-8
+
 class UsersController < ApplicationController
+  before_filter :authenticate_login!
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    #@users = User.all
+    @users = User.find_by_sql ["SELECT users.id,users.phone,users.name,SUM(infos.money) as money from users left JOIN infos on users.id = infos.user_id group by users.name order by users.id"]
   end
 
   # GET /users/1
@@ -25,10 +29,9 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
-
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        format.html { redirect_to "/users", notice: "新成员添加成功" }
         format.json { render action: 'show', status: :created, location: @user }
       else
         format.html { render action: 'new' }
@@ -42,7 +45,7 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        format.html { redirect_to @user, notice: "成员信息更新成功" }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -73,4 +76,5 @@ class UsersController < ApplicationController
       puts "======= user params ========="
       params.require(:user).permit(:name, :phone)
     end
+
 end

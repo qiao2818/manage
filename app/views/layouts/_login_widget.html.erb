@@ -1,0 +1,7 @@
+<% if login_signed_in? %>
+    <p>Welcome <%= current_login.email %></p>
+    <%= link_to 'logout', destroy_login_session_path, :method => :delete %>
+<% else %>
+    <p>You are not signed in.</p>
+    <%= link_to 'login', new_login_session_path %>
+<% end %>

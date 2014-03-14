@@ -1,14 +1,40 @@
 <p id="notice"><%= notice %></p>
-
 <p>
-  <strong>Name:</strong>
+  <strong>编号:</strong>
+  <%= @user.id %>
+</p>
+<p>
+  <strong>姓名:</strong>
   <%= @user.name %>
 </p>
-
 <p>
-  <strong>Phone:</strong>
+  <strong>电话:</strong>
   <%= @user.phone %>
 </p>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<table class="table">
+  <thead>
+  <tr>
+    <th style="text-align:center;width: 70px">日期</th>
+    <th style="text-align:center;width: 70px">地点</th>
+    <th style="text-align:center;width: 70px">充值/消费</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @user.infos.each do |info| %>
+      <tr>
+        <td style="text-align:center;width: 70px"><%= info.date %></td>
+        <td style="text-align:center;width: 70px"><%= info.address %></td>
+        <td style="text-align:center;width: 70px"><%= info.money %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<!-- <%= form_for [@user,@user.infos.build] do |f| %>
+    <p><%= f.text_area :money, :size => '40x10' %> </p>
+    <p><%= f.text_area :date, :size => '40x10' %> </p>
+    <p><%= f.text_area :address, :size => '40x10' %> </p>
+    <p><%= f.submit "Post Comment" %> </p>
+<% end %> -->

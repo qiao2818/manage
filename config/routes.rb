@@ -1,9 +1,17 @@
 Manage::Application.routes.draw do
-  get "home/index"
-  root :to => "home#index"
-  resources :users
 
+  devise_for :logins
+  resources :users do
+    resources :infos
+  end
 
+  get "collective_consumption" => "infos#collective_consumption"
+  get "recharge" => "infos#recharge"
+  get "chart" => "infos#chart"
+
+  #get "home/index"
+
+  root :to => "users#index"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -12,7 +20,7 @@ Manage::Application.routes.draw do
   # root 'welcome#index'
 
   # Example of regular route:
-  #   get 'products/:id' => 'catalog#view'
+  #   get 'products/:id' => 'catalog#v  iew'
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase

@@ -48,3 +48,10 @@ gem 'bootstrap-sass'
 group :development do
   gem 'rails_layout'
 end
+
+gem 'libv8'
+gem 'less-rails'
+gem 'twitter-bootstrap-rails'
+gem 'therubyracer'
+
+gem 'devise'

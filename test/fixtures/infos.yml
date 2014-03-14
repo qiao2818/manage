@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  money: 1
+  date: 2014-03-08 18:04:46
+  address: MyText
+
+two:
+  user_id: 1
+  money: 1
+  date: 2014-03-08 18:04:46
+  address: MyText

@@ -1,0 +1,33 @@
+<h1>Listing infos</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Money</th>
+      <th>Date</th>
+      <th>Address</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @infos.each do |info| %>
+      <tr>
+        <td><%= info.user_id %></td>
+        <td><%= info.money %></td>
+        <td><%= info.date %></td>
+        <td><%= info.address %></td>
+        <td><%= link_to 'Show', info %></td>
+        <td><%= link_to 'Edit', edit_info_path(info) %></td>
+        <td><%= link_to 'Destroy', info, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Info', new_info_path %>

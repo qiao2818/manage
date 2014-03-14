@@ -1,0 +1,51 @@
+<h1>集体消费</h1>
+
+<div>
+  <%= form_tag "/collective_consumption", :method => :get do %>
+      <% @users.each do |user| %>
+          <%= check_box_tag 'user_ids[]', user.id %><%= user.name %>
+      <% end %>
+
+      <div class="field">
+          <%= field_set_tag do %>
+              <p></p>
+              <p><%= text_field_tag 'money' %></p>
+          <% end %>
+      </div>
+
+      <%= button_tag "消费", data: { confirm: '确认消费？' } %>
+  <% end %>
+</div>
+
+<!-- </br>
+</br>
+<button class="test" name="submit" type="submit" value="提交1">test</button>
+
+<script>
+  $(".test").click(function(){
+      var user_ids = [];
+
+      var inputs = $("input:checked");
+      var j = inputs.length;
+
+      for (var i=0;i<j;i++){
+         console.log(inputs[i].value);
+         user_ids.push(inputs[i].value);
+      };
+
+      var money = $("#money").val();
+
+      var data = {
+          'user_ids': user_ids,
+          'money': money
+      };
+
+      $.ajax({
+          type: "GET",
+          url: "/collective_consumption",
+          data : data,
+          dataType: "json"
+      });
+      alert("ok");
+  });
+</script> -->
