@@ -19,7 +19,7 @@
         <td style="text-align:center;width: 70px"><%= user.id %></td>
         <td style="text-align:center;width: 70px"><%= user.name %></td>
         <td style="text-align:center;width: 70px"><%= user.phone %></td>
-        <td style="text-align:center;width: 70px" class="money"><%= user.money %></td>
+        <td style="text-align:center;width: 70px" class="money" id=<%= user.id %>><%= user.money %></td>
         <td style="text-align:center;width: 70px"><%= link_to '明细', '/users/'+user.id.to_s %></td>
         <% if current_login.id == 1 %>
             <td style="text-align:center;width: 70px"><%= link_to '充值', '/recharge?user_id='+user.id.to_s %></td>
@@ -34,7 +34,7 @@
 <button id="test">test</button>
 
 <script>
-    $("#test").click(function() {
+    $(document).ready(function () {
         var ms = $("table.table>tbody>tr>td.money");
         var j = ms.length;
         var money = 0;
@@ -44,7 +44,7 @@
                 money += a;
             }
         };
+        $('.total').text(money.toString());
         console.log(money.toString());
-        alert("总余额：" + money.toString());
     });
 </script>

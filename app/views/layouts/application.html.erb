@@ -12,16 +12,32 @@
 
     <header>
       <%= render 'layouts/navigation' %>
+      <script type="text/javascript" src="http://www.see-source.com/bootstrap/js/jquery.js"></script>
+      <script type="text/javascript" src="http://www.see-source.com/bootstrap/js/bootstrap-dropdown.js"></script>
     </header>
 
     <main role="main">
       <% if login_signed_in? %>
           <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="background-color: #000;">
             <div class="navbar-header" style="float: left;margin-left: 6.5%;margin-top: 1%;font-size: large">
-              <span style="color: #ffffff;">Admin</span>
+              <span class="total" style="color: #ffffff;">Admin</span>
             </div>
             <div class="navbar-header" style="float: right;margin-right: 2%;margin-top: 1%;">
-              <span style="color: #ffffff"><%= current_login.email %>   </span><%= link_to '退出', destroy_login_session_path, :method => :delete %>
+
+
+
+              <div class="dropdown user-dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="text-decoration: none;color: #ffffff;"><%= current_login.email %> <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#"><i class="glyphicon glyphicon-info-sign" style="width: 2em;"></i>当前余额 <span class="badge">7</span></a></li>
+                  <li>
+                    <a href="/logins/sign_out" class="dropdown-toggle" data-toggle="dropdown" data-method="delete" rel="nofollow">
+                      <i class="glyphicon glyphicon-log-out" style="width: 2em;"></i>退出
+                    </a>
+                  </li>
+                </ul>
+              </div>
+
             </div>
           </nav>
           <div class="container-fluid" style="margin-top: 50px">
