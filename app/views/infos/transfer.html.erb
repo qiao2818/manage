@@ -1,0 +1,15 @@
+<h1>转账</h1>
+<div>
+  <%= form_tag "/transfer", :method => :get do %>
+      <%= select_tag "from", @all_users.html_safe %>
+      =>
+      <%= select_tag "to", @all_users.html_safe %>
+      <div class="field">
+        <%= field_set_tag do %>
+            <p></p>
+            金额：<p><%= text_field_tag 'money' %></p>
+        <% end %>
+      </div>
+      <%= button_tag "转账", data: { confirm: '确认转账？' } %>
+  <% end %>
+</div>

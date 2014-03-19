@@ -1,6 +1,38 @@
+# encoding: utf-8
 class InfosController < ApplicationController
   before_filter :authenticate_login!
   before_action :set_info, only: [:show, :edit, :update, :destroy]
+
+  def transfer
+    if(!params["from"] && !params["to"])
+      @all_users = ""
+      users = User.find(:all)
+      users.each do |user|
+        @all_users += "<option>#{user.name}</option>"
+      end
+      render "transfer"
+    else
+      from = params["from"]
+      to = params["to"]
+      from_money = ("-" + params["money"]).to_f
+      to_money =  params["money"].to_f
+      condiditon = "('" + from + "','" + to + "')"
+      users = User.find_by_sql ["select * from users where name in #{condiditon}"]
+      users.each do |user|
+        info = Info.new
+        info.user_id = user.id
+        if(user.name == from)
+          info.money = from_money
+        else
+          info.money = to_money
+        end
+        info.date = Time.now
+        info.address = "由#{from}转账给#{to}"
+        info.save
+      end
+      redirect_to "/users"
+    end
+  end
 
   def search_by_date
     result = {}
@@ -8,7 +40,7 @@ class InfosController < ApplicationController
     money = []
     start_time = (Time.now.utc - 30.days).to_s.split(" ")[0]
     end_time = Time.now.utc.to_s.split(" ")[0]
-    infos = Info.find_by_sql ["select sum(money) as money,date(date) as date from infos where date > ? and date < ? and money < ? group by date(date)",start_time,end_time,0]
+    infos = Info.find_by_sql ["select sum(money) as money,date(date) as date from infos where date > ? and date < ? and money < ? and address != '转账' group by date(date)",start_time,end_time,0]
     infos.each do |info|
       date << info.date.to_s.gsub("-",".")
       money << info.money.to_s.gsub("-","").to_i
@@ -46,15 +78,7 @@ class InfosController < ApplicationController
   end
 
   def collective_consumption
-    puts "==================="
-    puts "==================="
-    puts current_login
-    puts current_login.id
-    puts params
-    puts "==================="
-    puts "==================="
     if(!params["user_ids"])
-      puts "1"
       @users = User.find(:all)
       render "collective_consumption"
     else
@@ -69,7 +93,7 @@ class InfosController < ApplicationController
         info.user_id = user_id.to_i
         info.money = percentmoney
         info.date = Time.now
-        info.address = "test" + user_id
+        info.address = params["address"]
         info.save
       end
       redirect_to "/users"

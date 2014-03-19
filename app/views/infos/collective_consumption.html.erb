@@ -1,5 +1,4 @@
 <h1>集体消费</h1>
-
 <div>
   <%= form_tag "/collective_consumption", :method => :get do %>
       <% @users.each do |user| %>
@@ -9,8 +8,13 @@
       <div class="field">
           <%= field_set_tag do %>
               <p></p>
-              <p><%= text_field_tag 'money' %></p>
+              金额：<p><%= text_field_tag 'money' %></p>
           <% end %>
+
+            <%= field_set_tag do %>
+            <p></p>
+            描述：<p><%= text_field_tag 'address' %></p>
+        <% end %>
       </div>
 
       <%= button_tag "消费", data: { confirm: '确认消费？' } %>
@@ -20,7 +24,6 @@
 <!-- </br>
 </br>
 <button class="test" name="submit" type="submit" value="提交1">test</button>
-
 <script>
   $(".test").click(function(){
       var user_ids = [];

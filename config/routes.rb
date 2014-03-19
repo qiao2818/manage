@@ -9,6 +9,7 @@ Manage::Application.routes.draw do
   get "recharge" => "infos#recharge"
   get "chart" => "infos#chart"
   get "search_by_date" => "infos#search_by_date"
+  get "transfer" => "infos#transfer"
 
   #get "home/index"
 
