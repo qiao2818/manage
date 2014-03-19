@@ -8,6 +8,7 @@ Manage::Application.routes.draw do
   get "collective_consumption" => "infos#collective_consumption"
   get "recharge" => "infos#recharge"
   get "chart" => "infos#chart"
+  get "search_by_date" => "infos#search_by_date"
 
   #get "home/index"
 

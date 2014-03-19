@@ -34,14 +34,16 @@
 <script>
     $(document).ready(function () {
         var ms = $("table.table>tbody>tr>td.money");
+        var user_money = $("td#<%= current_login.id %>").text();
         var j = ms.length;
         var money = 0;
-        for (var i=0;i<5;i++){
+        for (var i=0;i<j;i++){
             if(ms[i].innerHTML != ""){
                 a = parseFloat(ms[i].innerHTML)
                 money += a;
             }
         };
+        $('.badge').text(user_money);
         $('.total').text(money.toString());
         console.log(money.toString());
     });

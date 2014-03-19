@@ -2,6 +2,25 @@ class InfosController < ApplicationController
   before_filter :authenticate_login!
   before_action :set_info, only: [:show, :edit, :update, :destroy]
 
+  def search_by_date
+    result = {}
+    date = []
+    money = []
+    start_time = (Time.now.utc - 30.days).to_s.split(" ")[0]
+    end_time = Time.now.utc.to_s.split(" ")[0]
+    infos = Info.find_by_sql ["select sum(money) as money,date(date) as date from infos where date > ? and date < ? and money < ? group by date(date)",start_time,end_time,0]
+    infos.each do |info|
+      date << info.date.to_s.gsub("-",".")
+      money << info.money.to_s.gsub("-","").to_i
+    end
+    result["date"] = date
+    result["money"] = money
+    puts result
+    respond_to do |format|
+      format.js { render :json => result }
+    end
+  end
+
   def chart
     render "chart"
   end
