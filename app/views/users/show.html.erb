@@ -22,7 +22,7 @@
   </thead>
 
   <tbody>
-  <% @user.infos.each do |info| %>
+  <% @user.infos.sort{|a,b| b.date <=> a.date}.each do |info| %>
       <tr>
         <td style="text-align:center;width: 70px"><%= info.date %></td>
         <td style="text-align:center;width: 70px"><%= info.address %></td>
