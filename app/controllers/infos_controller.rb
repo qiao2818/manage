@@ -40,7 +40,7 @@ class InfosController < ApplicationController
     money = []
     start_time = (Time.now.utc - 30.days).to_s.split(" ")[0]
     end_time = Time.now.utc.to_s.split(" ")[0]
-    infos = Info.find_by_sql ["select sum(money) as money,date(date) as date from infos where date > ? and date < ? and money < ? and address != '转账' group by date(date)",start_time,end_time,0]
+    infos = Info.find_by_sql ["select sum(money) as money,date(date) as date from infos where date > ? and date < ? and money < ? and address NOT like '% 转账%' group by date(date)",start_time,end_time,0]
     infos.each do |info|
       date << info.date.to_s.gsub("-",".")
       money << info.money.to_s.gsub("-","").to_i
