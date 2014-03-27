@@ -69,6 +69,7 @@ class InfosController < ApplicationController
       info.user_id = user_id
       info.money = money
       info.date = Time.now
+      info.address = "充值"
       info.save
       redirect_to "/users"
     else

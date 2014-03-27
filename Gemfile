@@ -55,3 +55,6 @@ gem 'twitter-bootstrap-rails'
 gem 'therubyracer'
 
 gem 'devise'
+gem 'highcharts-rails'
+
+gem 'thin'
