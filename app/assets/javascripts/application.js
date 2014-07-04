@@ -15,5 +15,9 @@
 //= require twitter/bootstrap
 //= require turbolinks
 //= require bootstrap
-//= require_tree .
+// require_tree . # 解决highcharts与exporting等JS文件的加载顺序
 //= require twitter/bootstrap
+
+//= require bootstrap-dropdown
+//= require highcharts
+//= require exporting
