@@ -93,8 +93,12 @@ class InfosController < ApplicationController
       user_ids = params["user_ids"]
       money = params["money"].to_f
       request_time = params["time"]
-      time = DateTime.parse(request_time)
-      puts "#{time}"
+
+      if (request_time == "")
+        time = Time.now
+      else
+        time = DateTime.parse(request_time)
+      end
 
       if(!money.to_s.include?("-"))
         money *= -1
