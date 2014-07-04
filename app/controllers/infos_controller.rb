@@ -40,13 +40,20 @@ class InfosController < ApplicationController
     money = []
     start_time = (Time.now.utc - 30.days).to_s.split(" ")[0]
     end_time = Time.now.utc.to_s.split(" ")[0]
+
     infos = Info.find_by_sql ["select sum(money) as money,date(date) as date from infos where date > ? and date < ? and money < ? and address NOT like '% 转账%' group by date(date)",start_time,end_time,0]
+    infos_count = infos.count
     infos.each do |info|
-      date << info.date.to_s.gsub("-",".")
+      if (infos_count < 11)
+        date << info.date.to_s.gsub("-",".")
+      else
+        date << info.date.to_s.gsub("-",".").split(".").last
+      end
       money << info.money.to_s.gsub("-","").to_i
     end
     result["date"] = date
     result["money"] = money
+
     puts result
     respond_to do |format|
       format.js { render :json => result }
@@ -85,6 +92,10 @@ class InfosController < ApplicationController
     else
       user_ids = params["user_ids"]
       money = params["money"].to_f
+      request_time = params["time"]
+      time = DateTime.parse(request_time)
+      puts "#{time}"
+
       if(!money.to_s.include?("-"))
         money *= -1
       end
@@ -93,7 +104,7 @@ class InfosController < ApplicationController
         info = Info.new
         info.user_id = user_id.to_i
         info.money = percentmoney
-        info.date = Time.now
+        info.date = time
         info.address = params["address"]
         info.save
       end

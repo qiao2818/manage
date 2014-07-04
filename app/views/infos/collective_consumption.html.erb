@@ -11,10 +11,15 @@
               金额：<p><%= text_field_tag 'money' %></p>
           <% end %>
 
-            <%= field_set_tag do %>
+          <%= field_set_tag do %>
+              <p></p>
+              描述：<p><%= text_field_tag 'address' %></p>
+          <% end %>
+
+          <%= field_set_tag do %>
             <p></p>
-            描述：<p><%= text_field_tag 'address' %></p>
-        <% end %>
+              日期：<p><%= text_field_tag 'time' %></p>
+          <% end %>
       </div>
 
       <%= button_tag "消费", data: { confirm: '确认消费？' } %>
