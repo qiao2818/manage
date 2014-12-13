@@ -1,4 +1,5 @@
-source 'https://rubygems.org'
+#source 'https://rubygems.org'
+source 'http://ruby.taobao.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.2'
@@ -58,3 +59,8 @@ gem 'devise'
 gem 'highcharts-rails'
 
 gem 'thin'
+
+gem 'nokogiri'
+gem 'spreadsheet'
+
+gem 'curb'
